@@ -1,0 +1,88 @@
+:root {
+    --bg-navy: #0f101a;
+    --neon-pink: #ff7eb6;
+    --card-bg: #231d31;
+}
+
+body {
+    background-color: var(--bg-navy);
+    color: white;
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Home Button Top Right */
+.top-nav {
+    position: fixed;
+    top: 30px;
+    right: 40px;
+}
+
+.home-btn {
+    text-decoration: none;
+    color: var(--neon-pink);
+    border: 2px solid var(--neon-pink);
+    padding: 10px 25px;
+    border-radius: 8px;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.home-btn:hover {
+    background: var(--neon-pink);
+    color: var(--bg-navy);
+}
+
+/* Counter UI */
+.counter-container {
+    text-align: center;
+    background: var(--card-bg);
+    padding: 50px;
+    border-radius: 20px;
+    border: 3px solid var(--neon-pink);
+    box-shadow: 0 0 20px rgba(255, 126, 182, 0.2);
+}
+
+.project-title {
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    color: var(--neon-pink);
+}
+
+.display-screen {
+    font-size: 8rem;
+    font-weight: bold;
+    background: #13141f;
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    margin-bottom: 40px;
+    padding: 20px 60px;
+    min-width: 250px;
+    text-shadow: 0 0 15px var(--neon-pink);
+}
+
+.controls {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.control-btn {
+    padding: 15px 30px;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    background: transparent;
+    color: white;
+    border: 2px solid white;
+    border-radius: 10px;
+    transition: 0.3s;
+}
+
+.up:hover { border-color: #00ff88; color: #00ff88; transform: scale(1.1); }
+.down:hover { border-color: #ff4444; color: #ff4444; transform: scale(1.1); }
+.clear:hover { border-color: var(--neon-pink); color: var(--neon-pink); transform: scale(1.1); }

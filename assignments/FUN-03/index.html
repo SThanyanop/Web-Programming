@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotics Counter | KMUTT</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="top-nav">
+        <a class="home-btn" onclick="window.location.href='../../../index.html'">Home</a>
+    </nav>
+
+    <div class="counter-container">
+        <h1 class="project-title">System Counter</h1>
+        
+        <div class="display-screen" id="display">0</div>
+
+        <div class="controls">
+            <button class="control-btn up" onclick="updateCounter(1)">UP</button>
+            <button class="control-btn down" onclick="updateCounter(-1)">DOWN</button>
+            <button class="control-btn clear" onclick="resetCounter()">CLEAR</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
