@@ -23,11 +23,20 @@ body {
     border-radius: 5px;
 }
 
+.home-btn {
+    background-color: #ff7eb6 !important; /* Solid pink */
+    color: #0f101a !important;            /* Dark text */
+}
+
 /* Grid for 8 items */
 .grid-container {
     display: grid;
     grid-template-columns: repeat(4, 1fr); /* 4 columns for 8 items */
     gap: 20px;
+    height: auto;
+    row-gap: 50px; 
+    min-height: 100vh;
+    column-gap: 20px;
     max-width: 1200px;
     padding: 20px;
 }
@@ -42,6 +51,15 @@ body {
     flex-direction: column;
     justify-content: flex-start; /* Items begin from the top */
     text-align: left;
+    height: 100%;
+}
+
+.card-header {
+    min-height: 80px; /* Adjust this so the longest title fits */
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Centers short titles vertically in the space */
+    margin-bottom: 20px;
 }
 
 .card-img {
