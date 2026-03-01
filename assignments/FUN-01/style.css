@@ -1,0 +1,93 @@
+/* General Styling */
+body {
+    background-color: #0f101a;
+    color: white;
+    font-family: sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.navbar {
+    margin: 20px;
+    display: flex;
+    gap: 15px;
+}
+
+.navbar button {
+    background: #ff7eb6;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+}
+
+/* Grid for 8 items */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns for 8 items */
+    gap: 20px;
+    max-width: 1200px;
+    padding: 20px;
+}
+
+.card {
+    background-color: #231d31;
+    border: 2px solid #ff7eb6;
+    border-radius: 10px;
+    padding: 15px;
+    min-height: 360px; /* Increased height as requested */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Items begin from the top */
+    text-align: left;
+}
+
+.card-img {
+    width: 100%;           /* Fills the width of the card */
+    height: 180px;         /* Fixed height for uniformity */
+    object-fit: cover;     /* Crops image to fill the box without stretching */
+    border-radius: 8px;    /* Matches the card's rounded corners */
+    margin-bottom: 1px;   /* Space between image and title */
+    border: 1px solid #ff7eb6; /* Optional: tiny pink border around the image */
+}
+
+.card-title {
+    color: #ff7eb6;
+    align-self: center;
+    margin-bottom: 1px;
+}
+
+/* Tightened Bullet Points */
+p.bullet {
+    position: relative;
+    padding-left: 15px;
+    margin-bottom: 1px; /* Narrow gap between bullets */
+    font-size: 0.9rem;
+}
+
+p.bullet::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: #ff7eb6;
+}
+
+.card-button {
+    margin-top: auto; /* Pushes button to bottom while text stays top */
+    background: #ff7eb6;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* Responsive for Mobile */
+@media (max-width: 1000px) {
+    .grid-container { grid-template-columns: repeat(2, 1fr); }
+}
+
+#Github {
+    background-color: #eee;
+}

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanyanop's Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <button onclick="showPage('projects')">My Websites</button>
+        <button onclick="showPage('courses')">My Courses</button>
+    </nav>
+
+    <section id="projects" class="page-section">
+        <h1 class="main-title">Favorite Websites</h1>
+        <div class="grid-container">
+            <div class="card">
+                <img src="image/GitHub_Invertocat_Logo.svg" alt="Project Screenshot" class="card-img" id="Github">
+                
+                <h2 class="card-title">Github</h2>
+                <p class="bullet">Use for Coding work and any project</p>
+                <p class="bullet">Use for work at FRA142/143 (Programming subject)</p>
+                <button class="card-button" onclick="window.open('https://github.com/SThanyanop')">Visit Site</button>
+            </div>
+
+            <div class="card">
+                <img src="image/YouTube_full-color_icon_(2017).svg.png" alt="Project Screenshot" class="card-img">
+                
+                <h2 class="card-title">Youtube</h2>
+                <p class="bullet">For Entertainment</p>
+                <p class="bullet">For research and learning</p>
+                <button class="card-button" onclick="window.open('https://youtu.be/QtXby3twMmI?si=XilD4w_wqlTweDfj')">Visit Site</button>
+            </div>
+
+            <div class="card">
+                <img src="image/Facebook-logo.jpg" alt="Project Screenshot" class="card-img">
+                
+                <h2 class="card-title">Facebook</h2>
+                <p class="bullet">For news and entertainment</p>
+                <p class="bullet">For connecting with friends</p>
+                <button class="card-button" onclick="window.open('https://web.facebook.com/JohnSThanyanop')">Visit Site</button>
+            </div>
+
+            <div class="card">
+                <img src="image/images.jpg" alt="Project Screenshot" class="card-img">
+                
+                <h2 class="card-title">Instagram</h2>
+                <p class="bullet">For news and entertainment</p>
+                <p class="bullet">For connecting with friends</p>
+                <button class="card-button" onclick="window.open('https://www.instagram.com/s_t.j.o.h.n/')">Visit Site</button>
+            </div>
+
+            <div class="card">
+                <img src="image/6915575b6b40f6ae7bcfccac_LEB2.png" alt="Project Screenshot" class="card-img">
+                
+                <h2 class="card-title">LEB2</h2>
+                <p class="bullet">For learning and research</p>
+                <p class="bullet">For accessing university resources</p>
+                <button class="card-button" onclick="window.open('https://leb2.kmutt.ac.th')">Visit Site</button>
+            </div>
+
+            <div class="card">
+                <img src="your-image-link.jpg" alt="Project Screenshot" class="card-img">
+                
+                <h2 class="card-title">Project 1</h2>
+                <p class="bullet">Landslide Detection Pipeline</p>
+                <p class="bullet">Built with Python & OpenCV</p>
+                <button class="card-button">Visit Site</button>
+            </div>
+
+            <div class="card">
+                <img src="your-image-link.jpg" alt="Project Screenshot" class="card-img">
+                
+                <h2 class="card-title">Project 1</h2>
+                <p class="bullet">Landslide Detection Pipeline</p>
+                <p class="bullet">Built with Python & OpenCV</p>
+                <button class="card-button">Visit Site</button>
+            </div>
+
+            <div class="card">
+                <img src="your-image-link.jpg" alt="Project Screenshot" class="card-img">
+                
+                <h2 class="card-title">Project 1</h2>
+                <p class="bullet">Landslide Detection Pipeline</p>
+                <p class="bullet">Built with Python & OpenCV</p>
+                <button class="card-button">Visit Site</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="courses" class="page-section" style="display:none;">
+        <h1 class="main-title">University Courses</h1>
+        <div class="grid-container">
+            <div class="card">
+                <h2 class="card-title">Robotics Engineering</h2>
+                <p class="bullet">KMUTT (FIBO) Curriculum</p>
+                <p class="bullet">Focus: Automation & Machine Learning</p>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page-section').forEach(section => {
+                section.style.display = 'none';
+            });
+            document.getElementById(pageId).style.display = 'block';
+        }
+    </script>
+</body>
+</html>
