@@ -3,41 +3,60 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const app = express();
-app.use(cors());
+
+// Enable CORS for your Vite frontend on port 5176
+app.use(cors({
+  origin: 'http://localhost:5176'
+}));
+
 app.use(express.json());
 
-// 1. Connect to MongoDB (Make sure MongoDB Compass is running!)
-// server/server.js
-mongoose.connect('mongodb://127.0.0.1:27017/populationDB')
-  .then(() => console.log("🚀 Success: Connected to MongoDB"))
-  .catch((err) => {
-    console.error("❌ Critical Error: Could not connect to MongoDB!");
-    console.error(err.message);
-  });
+// Connect to local MongoDB using explicit IP to avoid timeout
+mongoose.connect('mongodb://127.0.0.1:27017/population_db')
+  .then(() => console.log("✅ MongoDB Connected"))
+  .catch(err => console.error("❌ MongoDB Connection Error:", err));
 
-// 2. Create the "Blueprint" for your data
+// Define the Data Schema
 const LogSchema = new mongoose.Schema({
-  manCount: Number,
-  womanCount: Number,
+  manCount: { type: Number, required: true },
+  womanCount: { type: Number, required: true },
   timestamp: { type: Date, default: Date.now }
 });
+
 const Log = mongoose.model('Log', LogSchema);
 
-// 3. The API Routes
+/* --- API ROUTES --- */
+
+// GET: Fetch all logs from the database
 app.get('/api/logs', async (req, res) => {
-  const allLogs = await Log.find().sort({ timestamp: -1 });
-  res.json(allLogs);
+  try {
+    const logs = await Log.find().sort({ timestamp: -1 });
+    res.json(logs);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
+// POST: Save a new log entry
 app.post('/api/logs', async (req, res) => {
-  const newLog = new Log(req.body);
-  await newLog.save();
-  res.json(newLog);
+  try {
+    const newLog = new Log(req.body);
+    const savedLog = await newLog.save();
+    res.status(201).json(savedLog);
+  } catch (err) {
+    res.status(400).json({ error: err.message });
+  }
 });
 
+// DELETE: Clear all logs (Reset)
 app.delete('/api/logs', async (req, res) => {
-  await Log.deleteMany({});
-  res.json({ status: "Empty" });
+  try {
+    await Log.deleteMany({});
+    res.json({ message: "Database Reset Successful" });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-app.listen(5000, () => console.log("Server listening on Port 5000"));
+const PORT = 5000;
+app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`));
