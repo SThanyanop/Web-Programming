@@ -1,111 +1,187 @@
-/* General Styling */
+:root {
+    --hd-yellow: #ffe81f;
+    --hd-black: #0a0a0a;
+    --hd-grey: #1a1a1a;
+    --hd-border: #333;
+    --glow: 0 0 12px rgba(255, 232, 31, 0.4);
+}
+
 body {
-    background-color: #0f101a;
+    background-color: var(--hd-black);
     color: white;
-    font-family: sans-serif;
+    font-family: 'Chakra Petch', sans-serif;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin: 0;
+    padding-bottom: 50px;
+}
+
+/* CRT Scanline Effect */
+.crt-overlay {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%);
+    background-size: 100% 4px;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.2;
+}
+
+.terminal-header {
+    width: 100%;
+    padding: 30px;
+    text-align: center;
+    background: #111;
+    border-bottom: 3px solid var(--hd-yellow);
+}
+
+.main-title {
+    color: var(--hd-yellow);
+    letter-spacing: 4px;
+    font-size: 2.2rem;
+    text-shadow: var(--glow);
+}
+
+.sub-status {
+    color: #888;
+    letter-spacing: 2px;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+.hazard-bar {
+    height: 10px;
+    width: 100%;
+    background: repeating-linear-gradient(
+        45deg,
+        var(--hd-yellow),
+        var(--hd-yellow) 10px,
+        #000 10px,
+        #000 20px
+    );
+    margin-top: 15px;
 }
 
 .navbar {
-    margin: 20px;
+    margin: 30px;
     display: flex;
     gap: 15px;
 }
 
-.navbar button {
-    background: #ff7eb6;
-    border: none;
-    padding: 10px 20px;
+.nav-btn {
+    background: transparent;
+    color: white;
+    border: 1px solid var(--hd-border);
+    padding: 10px 25px;
     cursor: pointer;
     font-weight: bold;
-    border-radius: 5px;
+    text-transform: uppercase;
+    transition: 0.2s;
 }
 
-.home-btn {
-    background-color: #ff7eb6 !important; /* Solid pink */
-    color: #0f101a !important;            /* Dark text */
+.nav-btn.active, .nav-btn:hover {
+    background: var(--hd-yellow);
+    color: black;
+    border-color: var(--hd-yellow);
 }
 
-/* Grid for 8 items */
+.section-label {
+    color: var(--hd-yellow);
+    margin: 20px 0;
+    letter-spacing: 3px;
+    text-align: center;
+}
+
+/* 4-Column Grid for 8 items */
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr); /* 4 columns for 8 items */
+    grid-template-columns: repeat(4, 1fr);
     gap: 20px;
-    height: auto;
-    row-gap: 50px; 
-    min-height: 100vh;
-    column-gap: 20px;
-    max-width: 1200px;
-    padding: 20px;
+    max-width: 1300px;
+    width: 95%;
 }
 
 .card {
-    background-color: #231d31;
-    border: 2px solid #ff7eb6;
-    border-radius: 10px;
-    padding: 15px;
-    min-height: 360px; /* Increased height as requested */
+    background: var(--hd-grey);
+    border: 1px solid var(--hd-border);
+    padding: 20px;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Items begin from the top */
-    text-align: left;
-    height: 100%;
+    min-height: 400px;
+    transition: 0.3s;
 }
 
-.card-header {
-    min-height: 80px; /* Adjust this so the longest title fits */
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Centers short titles vertically in the space */
-    margin-bottom: 20px;
+.card:hover {
+    border-color: var(--hd-yellow);
+    box-shadow: var(--glow);
+    transform: translateY(-5px);
+}
+
+.strat-code {
+    font-family: monospace;
+    color: var(--hd-yellow);
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    letter-spacing: 4px;
 }
 
 .card-img {
-    width: 100%;           /* Fills the width of the card */
-    height: 180px;         /* Fixed height for uniformity */
-    object-fit: cover;     /* Crops image to fill the box without stretching */
-    border-radius: 8px;    /* Matches the card's rounded corners */
-    margin-bottom: 1px;   /* Space between image and title */
-    border: 1px solid #ff7eb6; /* Optional: tiny pink border around the image */
+    width: 100%;
+    height: 120px;
+    object-fit: contain;
+    background: black;
+    border: 1px solid #222;
+    margin-bottom: 15px;
+    filter: grayscale(0.3);
 }
 
 .card-title {
-    color: #ff7eb6;
-    align-self: center;
-    margin-bottom: 1px;
+    font-size: 1.1rem;
+    color: white;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+    border-bottom: 1px solid #444;
+    padding-bottom: 5px;
 }
 
-/* Tightened Bullet Points */
 p.bullet {
     position: relative;
-    padding-left: 15px;
-    margin-bottom: 1px; /* Narrow gap between bullets */
-    font-size: 0.9rem;
+    padding-left: 20px;
+    margin-bottom: 8px;
+    font-size: 0.8rem;
+    color: #bbb;
 }
 
 p.bullet::before {
-    content: "•";
+    content: ">";
     position: absolute;
     left: 0;
-    color: #ff7eb6;
-}
-
-.card-button {
-    margin-top: auto; /* Pushes button to bottom while text stays top */
-    background: #ff7eb6;
-    border: none;
-    padding: 10px;
-    cursor: pointer;
+    color: var(--hd-yellow);
     font-weight: bold;
 }
 
-/* Responsive for Mobile */
-@media (max-width: 1000px) {
-    .grid-container { grid-template-columns: repeat(2, 1fr); }
+.card-button {
+    margin-top: auto;
+    background: var(--hd-yellow);
+    color: black;
+    border: none;
+    padding: 12px;
+    font-weight: 900;
+    cursor: pointer;
+    clip-path: polygon(0 0, 100% 0, 100% 80%, 90% 100%, 0 100%);
 }
 
-#Github {
-    background-color: #eee;
+.card-button:hover { background: white; }
+
+/* Course Card Special Style */
+.training { border-left: 5px solid var(--hd-yellow); }
+
+/* Responsive */
+@media (max-width: 1100px) {
+    .grid-container { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+    .grid-container { grid-template-columns: 1fr; }
 }

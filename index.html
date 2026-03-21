@@ -3,69 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Collection</title>
+    <title>SES - ARCHIVE OF DEMOCRACY</title>
     <link rel="stylesheet" href="index_style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="crt-overlay"></div>
+    <div class="scanlines"></div>
 
-    <h1 class="main-title">My Work Collection</h1>
+    <nav class="status-bar">
+        <div class="ship-name">SES EXECUTOR OF CODE</div>
+        <div class="user-id">OPERATOR: THANYANOP // ROBOTICS DIV.</div>
+        <div class="system-status">SYSTEMS: <span class="online">OPTIMIZED</span></div>
+    </nav>
 
-    <div class="grid-container">
-        <div class="card">
-            <h2 class="card-title">FUN-01 <br>My first website</h2>
-            <iframe src="assignments/FUN-01/index.html" class="card-preview"></iframe>
-            <p class="bullet">My favorite website</p>
-            <p class="bullet">Course that i learn in this semester</p>
-            <button class="card-button" onclick="window.location.href='assignments/FUN-01/index.html'">Explore</button>
-        </div>
+    <main class="terminal-container">
+        <aside class="stratagem-sidebar">
+            <h3 class="section-label">SELECT STRATAGEM</h3>
+            
+            <div class="stratagem-item active" onclick="updatePreview('FUN-01', 'Initial Deployment', 'assignments/FUN-01/index.html')">
+                <div class="code-sequence">↑ ↓ → ← ↑</div>
+                <div class="strat-info">
+                    <span class="strat-id">FUN-01</span>
+                    <span class="strat-name">MY FIRST WEBSITE</span>
+                </div>
+            </div>
 
-        <div class="card">
-            <h2 class="card-title">FUN-02 <br>About Me</h2>
-            <iframe src="assignments/FUN-02/index.html" class="card-preview"></iframe>
-            <p class="bullet">My personal profile page</p>
-            <p class="bullet">My 3D logo</p>
-            <p class="bullet">Introduction to my background and interests</p>
-            <button class="card-button" onclick="window.location.href='assignments/FUN-02/index.html'">Explore</button>
-        </div>
+            <div class="stratagem-item" onclick="updatePreview('FUN-02', 'Personnel Bio', 'assignments/FUN-02/index.html')">
+                <div class="code-sequence">→ ↓ ↑ ↑ ←</div>
+                <div class="strat-info">
+                    <span class="strat-id">FUN-02</span>
+                    <span class="strat-name">ABOUT ME (3D LOGO)</span>
+                </div>
+            </div>
 
-        <div class="card">
-            <h2 class="card-title">FUN-03 <br>Counter</h2>
-            <iframe src="assignments/FUN-03/index.html" class="card-preview"></iframe>
-            <p class="bullet">Interactive counter with UP/DOWN/CLEAR buttons</p>
-            <p class="bullet">JavaScript and CSS animations</p>
-            <button class="card-button" onclick="window.location.href='assignments/FUN-03/index.html'">Explore</button>
-        </div>
+            <div class="stratagem-item" onclick="updatePreview('FUN-03', 'Counter Logic', 'assignments/FUN-03/index.html')">
+                <div class="code-sequence">↓ ↓ ↑ → →</div>
+                <div class="strat-info">
+                    <span class="strat-id">FUN-03</span>
+                    <span class="strat-name">INTERACTIVE COUNTER</span>
+                </div>
+            </div>
 
-        <div class="card">
-            <h2 class="card-title">FUN-04</h2>
-            <iframe src="http://localhost:5173" class="card-preview"></iframe>
-            <p class="bullet">React-based counter application</p>
-            <p class="bullet">Interactive UI with save and reset functionality</p>
-            <button class="card-button" onclick="window.location.href='http://localhost:5173'">Explore</button>
-        </div>
+            <div class="stratagem-item" onclick="updatePreview('FUN-04', 'React Core', 'http://localhost:5173')">
+                <div class="code-sequence">↑ → ↓ ↓ ↓</div>
+                <div class="strat-info">
+                    <span class="strat-id">FUN-04</span>
+                    <span class="strat-name">REACT DEPLOYMENT</span>
+                </div>
+            </div>
 
-        <div class="card">
-            <h2 class="card-title">FUN-05</h2>
-            <iframe src="http://localhost:5176" class="card-preview"></iframe>
-            <p class="bullet">React-based counter application with MongoDB backend</p>
-            <p class="bullet">Database integration and persistent storage</p>
-            <button class="card-button" onclick="window.location.href='http://localhost:5176'">Explore</button>
-        </div>
+            <div class="stratagem-item" onclick="updatePreview('FUN-05', 'Data Extraction', 'http://localhost:5176')">
+                <div class="code-sequence">← ← ↓ ↑ →</div>
+                <div class="strat-info">
+                    <span class="strat-id">FUN-05</span>
+                    <span class="strat-name">MONGODB INTEGRATION</span>
+                </div>
+            </div>
+        </aside>
 
-        <div class="card">
-            <h2 class="card-title">FUN-06</h2>
-            <p class="bullet">Hello World</p>
-            <p class="bullet">Hello World</p>
-            <button class="card-button">Explore</button>
-        </div>
+        <section class="viewport">
+            <div class="viewport-header">
+                <h2 id="current-title">INITIAL DEPLOYMENT</h2>
+                <span class="threat-level">THREAT LEVEL: NEGLIGIBLE</span>
+            </div>
+            
+            <div class="iframe-container">
+                <iframe id="main-frame" src="assignments/FUN-01/index.html"></iframe>
+            </div>
 
-        <div class="card">
-            <h2 class="card-title">FUN-07</h2>
-            <p class="bullet">Hello World</p>
-            <p class="bullet">Hello World</p>
-            <button class="card-button">Explore</button>
-        </div>
-    </div>
+            <div class="deployment-footer">
+                <button class="deploy-btn" id="deploy-link" onclick="window.open('assignments/FUN-01/index.html', '_blank')">
+                    CONFIRM DEPLOYMENT
+                </button>
+            </div>
+        </section>
+    </main>
 
+    <script>
+        function updatePreview(id, title, url) {
+            document.getElementById('current-title').innerText = title;
+            document.getElementById('main-frame').src = url;
+            document.getElementById('deploy-link').setAttribute('onclick', `window.open('${url}', '_blank')`);
+            
+            // UI Visual feedback
+            document.querySelectorAll('.stratagem-item').forEach(item => item.classList.remove('active'));
+            event.currentTarget.classList.add('active');
+        }
+    </script>
 </body>
 </html>

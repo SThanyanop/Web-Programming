@@ -3,138 +3,128 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thanyanop's Portfolio</title>
+    <title>SES - ARCHIVE OF DEMOCRACY</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="crt-overlay"></div>
+
+    <header class="terminal-header">
+        <h1 class="main-title">OPERATOR: THANYANOP SRIWANIT</h1>
+        <p class="sub-status">UNIT: FIBO ROBOTICS & AUTOMATION // 3RD YEAR STUDENT</p>
+        <div class="hazard-bar"></div>
+    </header>
 
     <nav class="navbar">
-        <button class="home-btn" onclick="window.location.href='../../../index.html'">Home</button>
-        <button onclick="showPage('projects')">My Websites</button>
-        <button onclick="showPage('courses')">My Courses</button>
+        <button class="nav-btn" onclick="window.location.href='../../../index.html'">RETURN TO SHIP</button>
+        <button class="nav-btn active" onclick="showPage('projects')">TACTICAL ASSETS</button>
+        <button class="nav-btn" onclick="showPage('courses')">TRAINING LOGS</button>
     </nav>
 
     <section id="projects" class="page-section">
-        <h1 class="main-title">Favorite Websites</h1>
+        <h2 class="section-label">// PRIORITY STRATAGEMS</h2>
         <div class="grid-container">
             <div class="card">
-                <img src="image/GitHub_Invertocat_Logo.svg" alt="Project Screenshot" class="card-img" id="Github">
-                
-                <h2 class="card-title">Github</h2>
-                <p class="bullet">Use for Coding work and any project</p>
-                <p class="bullet">Use for work at FRA142/143 (Programming subject)</p>
-                <button class="card-button" onclick="window.open('https://github.com/SThanyanop')">Visit Site</button>
+                <div class="strat-code">↑ ↓ → ←</div>
+                <img src="image/GitHub_Invertocat_Logo.svg" alt="GitHub" class="card-img" id="Github">
+                <h2 class="card-title">GITHUB</h2>
+                <p class="bullet">CENTRAL CODE REPOSITORY</p>
+                <p class="bullet">FRA142/143 PROGRAMMING LOGS</p>
+                <button class="card-button" onclick="window.open('https://github.com/SThanyanop')">ENGAGE</button>
             </div>
-
             <div class="card">
-                <img src="image/YouTube_full-color_icon_(2017).svg.png" alt="Project Screenshot" class="card-img">
-                
-                <h2 class="card-title">Youtube</h2>
-                <p class="bullet">For Entertainment</p>
-                <p class="bullet">For research and learning</p>
-                <button class="card-button" onclick="window.open('https://youtu.be/QtXby3twMmI?si=XilD4w_wqlTweDfj')">Visit Site</button>
+                <div class="strat-code">→ → ↓ ↑</div>
+                <img src="image/YouTube_full-color_icon_(2017).svg.png" alt="YouTube" class="card-img">
+                <h2 class="card-title">YOUTUBE</h2>
+                <p class="bullet">ENTERTAINMENT & INTEL</p>
+                <p class="bullet">RESEARCH & FIELD DATA</p>
+                <button class="card-button" onclick="window.open('https://youtu.be/QtXby3twMmI?si=XilD4w_wqlTweDfj')">ENGAGE</button>
             </div>
-
             <div class="card">
-                <img src="image/Facebook-logo.jpg" alt="Project Screenshot" class="card-img">
-                
-                <h2 class="card-title">Facebook</h2>
-                <p class="bullet">For news and entertainment</p>
-                <p class="bullet">For connecting with friends</p>
-                <button class="card-button" onclick="window.open('https://web.facebook.com/JohnSThanyanop')">Visit Site</button>
+                <div class="strat-code">← ← → ↓</div>
+                <img src="image/Facebook-logo.jpg" alt="Facebook" class="card-img">
+                <h2 class="card-title">FACEBOOK</h2>
+                <p class="bullet">NEWS & CIVILIAN INTEL</p>
+                <p class="bullet">SQUAD COMMUNICATION</p>
+                <button class="card-button" onclick="window.open('https://web.facebook.com/JohnSThanyanop')">ENGAGE</button>
             </div>
-
             <div class="card">
-                <img src="image/images.jpg" alt="Project Screenshot" class="card-img">
-                
-                <h2 class="card-title">Instagram</h2>
-                <p class="bullet">For news and entertainment</p>
-                <p class="bullet">For connecting with friends</p>
-                <button class="card-button" onclick="window.open('https://www.instagram.com/s_t.j.o.h.n/')">Visit Site</button>
+                <div class="strat-code">↑ ↑ ↓ ←</div>
+                <img src="image/images.jpg" alt="Instagram" class="card-img">
+                <h2 class="card-title">INSTAGRAM</h2>
+                <p class="bullet">VISUAL RECONNAISSANCE</p>
+                <p class="bullet">SOCIAL NETWORK ENCRYPTION</p>
+                <button class="card-button" onclick="window.open('https://www.instagram.com/s_t.j.o.h.n/')">ENGAGE</button>
             </div>
-
             <div class="card">
-                <img src="image/6915575b6b40f6ae7bcfccac_LEB2.png" alt="Project Screenshot" class="card-img">
-                
+                <div class="strat-code">↓ → ← ↑</div>
+                <img src="image/6915575b6b40f6ae7bcfccac_LEB2.png" alt="LEB2" class="card-img">
                 <h2 class="card-title">LEB2</h2>
-                <p class="bullet">For learning and research</p>
-                <p class="bullet">For accessing university resources</p>
-                <button class="card-button" onclick="window.open('https://leb2.kmutt.ac.th')">Visit Site</button>
+                <p class="bullet">LEARNING & RESEARCH HUB</p>
+                <p class="bullet">UNIVERSITY RESOURCE ACCESS</p>
+                <button class="card-button" onclick="window.open('https://leb2.kmutt.ac.th')">ENGAGE</button>
             </div>
-
             <div class="card">
-                <img src="image/gmail-new-logo-google-mail-google-workspace.jpg" alt="Project Screenshot" class="card-img">
-                
-                <h2 class="card-title">Gmail</h2>
-                <p class="bullet">For email communication</p>
-                <p class="bullet">For managing personal and work emails</p>
-                <button class="card-button" onclick="window.open('https://mail.google.com')">Visit Site</button>
+                <div class="strat-code">→ ↓ ← →</div>
+                <img src="image/gmail-new-logo-google-mail-google-workspace.jpg" alt="Gmail" class="card-img">
+                <h2 class="card-title">GMAIL</h2>
+                <p class="bullet">SECURE COMMUNICATION</p>
+                <p class="bullet">DATA CORRESPONDENCE</p>
+                <button class="card-button" onclick="window.open('https://mail.google.com')">ENGAGE</button>
             </div>
-
             <div class="card">
-                <img src="image/gemini_aurora_thumbnail_4g_e74822ff0ca4259beb718.png" alt="Project Screenshot" class="card-img">
-                
-                <h2 class="card-title">Gemini</h2>
-                <p class="bullet">For educational purposes</p>
-                <p class="bullet">For handling small tasks</p>
-                <button class="card-button" onclick="window.open('https://gemini.google.com')">Visit Site</button>
+                <div class="strat-code">↑ → ↓ ↓</div>
+                <img src="image/gemini_aurora_thumbnail_4g_e74822ff0ca4259beb718.png" alt="Gemini" class="card-img">
+                <h2 class="card-title">GEMINI</h2>
+                <p class="bullet">AI ANALYTICS CORE</p>
+                <p class="bullet">RAPID TASK EXECUTION</p>
+                <button class="card-button" onclick="window.open('https://gemini.google.com')">ENGAGE</button>
             </div>
-
             <div class="card">
-                <img src="image/google.png" alt="Project Screenshot" class="card-img">
-                
-                <h2 class="card-title">Google</h2>
-                <p class="bullet">For searching and research</p>
-                <p class="bullet">For accessing online resources</p>
-                <button class="card-button" onclick="window.open('https://www.google.com')">Visit Site</button>
+                <div class="strat-code">← ↑ → ←</div>
+                <img src="image/google.png" alt="Google" class="card-img">
+                <h2 class="card-title">GOOGLE</h2>
+                <p class="bullet">GLOBAL SEARCH DATABASE</p>
+                <p class="bullet">ONLINE INTEL GATHERING</p>
+                <button class="card-button" onclick="window.open('https://www.google.com')">ENGAGE</button>
             </div>
         </div>
     </section>
 
     <section id="courses" class="page-section" style="display:none;">
-        <h1 class="main-title">University Courses</h1>
+        <h2 class="section-label">// TRAINING PROTOCOLS</h2>
         <div class="grid-container">
-
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">FRA361 Open-Topic</h2>
-                </div>
-                <p class="bullet">Independent Study and research</p>
-                <p class="bullet">Focus: Research and Development</p>
+            <div class="card training">
+                <div class="strat-code">DATA-01</div>
+                <h2 class="card-title">FRA361 OPEN-TOPIC</h2>
+                <p class="bullet">INDEPENDENT RESEARCH</p>
+                <p class="bullet">DEVELOPMENT FOCUS</p>
             </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">GEN321 Modern management and Leadership</h2>
-                </div>
-                <p class="bullet">General Education Course</p>
-                <p class="bullet">Focus: Management and Leadership Skills</p>
+            <div class="card training">
+                <div class="strat-code">LEAD-02</div>
+                <h2 class="card-title">GEN321 MODERN MGMT</h2>
+                <p class="bullet">LEADERSHIP SKILLS</p>
+                <p class="bullet">STRATEGIC MANAGEMENT</p>
             </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">FRA501 Pattern Recognition</h2>
-                </div>
-                <p class="bullet">Machine Learning Course</p>
-                <p class="bullet">Focus: Pattern Recognition and Classification</p>
+            <div class="card training">
+                <div class="strat-code">ML-03</div>
+                <h2 class="card-title">FRA501 PATTERN RECOGNITION</h2>
+                <p class="bullet">MACHINE LEARNING</p>
+                <p class="bullet">CLASSIFICATION CORE</p>
             </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">FRA502 Web Programming</h2>
-                </div>
-                <p class="bullet">Design and Development Course</p>
-                <p class="bullet">Focus: Web Development and Design</p>
+            <div class="card training">
+                <div class="strat-code">WEB-04</div>
+                <h2 class="card-title">FRA502 WEB PROGRAMMING</h2>
+                <p class="bullet">DESIGN & DEVELOPMENT</p>
+                <p class="bullet">UI DEPLOYMENT</p>
             </div>
-
-            <div class="card">
-                <div class="card-header">
-                    <h2 class="card-title">FRA626 Machine Vision</h2>
-                </div>
-                <p class="bullet">Learn about machine vision and image processing</p>
-                <p class="bullet">Focus: Image Analysis and Recognition</p>
+            <div class="card training">
+                <div class="strat-code">VIS-05</div>
+                <h2 class="card-title">FRA626 MACHINE VISION</h2>
+                <p class="bullet">IMAGE PROCESSING</p>
+                <p class="bullet">SENSORY ANALYSIS</p>
             </div>
-
         </div>
     </section>
 
@@ -144,6 +134,10 @@
                 section.style.display = 'none';
             });
             document.getElementById(pageId).style.display = 'block';
+            
+            // Toggle active button style
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            event.currentTarget.classList.add('active');
         }
     </script>
 </body>

@@ -3,25 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robotics Counter | KMUTT</title>
+    <title>TACTICAL MONITOR | KMUTT</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="crt-overlay"></div>
+    <div class="scanlines"></div>
 
     <nav class="top-nav">
-        <a class="home-btn" onclick="window.location.href='../../../index.html'">Home</a>
+        <a class="home-btn" onclick="window.location.href='../../../index.html'">RETURN TO BRIDGE</a>
     </nav>
 
+    <div class="hologram-wrapper">
+        <div class="stratagem-diamond">
+            <div class="side front">S</div>
+            <div class="side back">T</div>
+            <div class="side right">S</div>
+            <div class="side left">T</div>
+        </div>
+    </div>
+
     <div class="counter-container">
-        <h1 class="project-title">System Counter</h1>
+        <header class="terminal-header">
+            <h1 class="project-title">RESOURCE MONITOR // SEC-7</h1>
+            <p class="unit-id">UNIT: FIBO ROBOTICS & AUTOMATION</p>
+        </header>
         
         <div class="display-screen" id="display">0</div>
 
         <div class="controls">
-            <button class="control-btn up" onclick="updateCounter(1)">UP</button>
-            <button class="control-btn down" onclick="updateCounter(-1)">DOWN</button>
-            <button class="control-btn clear" onclick="resetCounter()">CLEAR</button>
+            <button class="control-btn up" onclick="updateCounter(1)">REINFORCE [↑]</button>
+            <button class="control-btn down" onclick="updateCounter(-1)">REDACT [↓]</button>
+            <button class="control-btn clear" onclick="resetCounter()">ABORT [X]</button>
         </div>
+        
+        <div class="hazard-footer"></div>
     </div>
 
     <script src="script.js"></script>
