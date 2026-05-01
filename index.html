@@ -3,93 +3,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SES - ARCHIVE OF DEMOCRACY</title>
+    <title>Thanyanop — My Spellbook</title>
     <link rel="stylesheet" href="index_style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;700&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="crt-overlay"></div>
-    <div class="scanlines"></div>
 
-    <nav class="status-bar">
-        <div class="ship-name">SES EXECUTOR OF CODE</div>
-        <div class="user-id">OPERATOR: THANYANOP // ROBOTICS DIV.</div>
-        <div class="system-status">SYSTEMS: <span class="online">OPTIMIZED</span></div>
-    </nav>
+    <canvas id="petals" aria-hidden="true"></canvas>
 
-    <main class="terminal-container">
-        <aside class="stratagem-sidebar">
-            <h3 class="section-label">SELECT STRATAGEM</h3>
-            
-            <div class="stratagem-item active" onclick="updatePreview('FUN-01', 'Initial Deployment', 'assignments/FUN-01/index.html')">
-                <div class="code-sequence">↑ ↓ → ← ↑</div>
-                <div class="strat-info">
-                    <span class="strat-id">FUN-01</span>
-                    <span class="strat-name">MY FIRST WEBSITE</span>
+    <div class="page">
+
+        <!-- Header -->
+        <header class="site-header">
+            <div class="header-glow" aria-hidden="true"></div>
+            <p class="site-label">my portfolio</p>
+            <h1 class="site-title">Spellbook</h1>
+            <p class="site-name">Thanyanop Sriwanit</p>
+            <p class="site-sub">Robotics &amp; Automation · Third Year Student</p>
+            <p class="site-quote"><em>"Even if I forget, the spells I've mastered will stay with me."</em></p>
+        </header>
+
+        <div class="divider" aria-hidden="true">
+            <span class="divider-gem">✦</span>
+        </div>
+
+        <!-- Spell list -->
+        <main class="spells" role="main">
+            <p class="section-label">my work so far</p>
+
+            <div class="spell-list">
+
+                <div class="spell-row" id="row-1">
+                    <div class="spell-info">
+                        <span class="spell-num">01</span>
+                        <div>
+                            <h2 class="spell-title">My First Website</h2>
+                            <p class="spell-note">Where it all began</p>
+                        </div>
+                        <span class="spell-dot ready" title="Ready"></span>
+                    </div>
+                    <div class="spell-btns">
+                        <button class="btn-view"
+                            data-num="1"
+                            data-name="My First Website"
+                            data-url="assignments/FUN-01/index.html">
+                            View
+                        </button>
+                        <button class="btn-link" data-url="assignments/FUN-01/index.html">Open</button>
+                    </div>
+                </div>
+
+                <div class="spell-row" id="row-2">
+                    <div class="spell-info">
+                        <span class="spell-num">02</span>
+                        <div>
+                            <h2 class="spell-title">About Me — 3D Logo</h2>
+                            <p class="spell-note">A little about myself</p>
+                        </div>
+                        <span class="spell-dot ready" title="Ready"></span>
+                    </div>
+                    <div class="spell-btns">
+                        <button class="btn-view"
+                            data-num="2"
+                            data-name="About Me — 3D Logo"
+                            data-url="assignments/FUN-02/index.html">
+                            View
+                        </button>
+                        <button class="btn-link" data-url="assignments/FUN-02/index.html">Open</button>
+                    </div>
+                </div>
+
+                <div class="spell-row" id="row-3">
+                    <div class="spell-info">
+                        <span class="spell-num">03</span>
+                        <div>
+                            <h2 class="spell-title">Interactive Counter</h2>
+                            <p class="spell-note">My first try with JavaScript</p>
+                        </div>
+                        <span class="spell-dot ready" title="Ready"></span>
+                    </div>
+                    <div class="spell-btns">
+                        <button class="btn-view"
+                            data-num="3"
+                            data-name="Interactive Counter"
+                            data-url="assignments/FUN-03/index.html">
+                            View
+                        </button>
+                        <button class="btn-link" data-url="assignments/FUN-03/index.html">Open</button>
+                    </div>
+                </div>
+
+                <div class="spell-row" id="row-4">
+                    <div class="spell-info">
+                        <span class="spell-num">04</span>
+                        <div>
+                            <h2 class="spell-title">React Application</h2>
+                            <p class="spell-note">My first React project — population counter</p>
+                        </div>
+                        <span class="spell-dot ready" title="Ready"></span>
+                    </div>
+                    <div class="spell-btns">
+                        <button class="btn-view"
+                            data-num="4"
+                            data-name="React Application"
+                            data-url="http://localhost:5173/">
+                            View
+                        </button>
+                        <button class="btn-link" data-url="http://localhost:5173/">Open</button>
+                    </div>
+                </div>
+
+                <div class="spell-row" id="row-5">
+                    <div class="spell-info">
+                        <span class="spell-num">05</span>
+                        <div>
+                            <h2 class="spell-title">MongoDB Integration</h2>
+                            <p class="spell-note">React + real database this time!</p>
+                        </div>
+                        <span class="spell-dot ready" title="Ready"></span>
+                    </div>
+                    <div class="spell-btns">
+                        <button class="btn-view"
+                            data-num="5"
+                            data-name="MongoDB Integration"
+                            data-url="http://localhost:5176/">
+                            View
+                        </button>
+                        <button class="btn-link" data-url="http://localhost:5176/">Open</button>
+                    </div>
+                </div>
+
+                <div class="spell-row" id="row-6">
+                    <div class="spell-info">
+                        <span class="spell-num">06</span>
+                        <div>
+                            <h2 class="spell-title">Three.js Scene</h2>
+                            <p class="spell-note">A magical 3D garden — my first Three.js!</p>
+                        </div>
+                        <span class="spell-dot ready" title="Ready"></span>
+                    </div>
+                    <div class="spell-btns">
+                        <button class="btn-view"
+                            data-num="6"
+                            data-name="Three.js Scene"
+                            data-url="assignments/FUN-06/index.html">
+                            View
+                        </button>
+                        <button class="btn-link" data-url="assignments/FUN-06/index.html">Open</button>
+                    </div>
+                </div>
+
+                <div class="spell-row" id="row-7">
+                    <div class="spell-info">
+                        <span class="spell-num">07</span>
+                        <div>
+                            <h2 class="spell-title">React Three Fiber</h2>
+                            <p class="spell-note">Three.js inside React — the Mage's World</p>
+                        </div>
+                        <span class="spell-dot ready" title="Ready"></span>
+                    </div>
+                    <div class="spell-btns">
+                        <button class="btn-view"
+                            data-num="7"
+                            data-name="React Three Fiber"
+                            data-url="http://localhost:5174/">
+                            View
+                        </button>
+                        <button class="btn-link" data-url="http://localhost:5174/">Open</button>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Preview window -->
+        <section class="preview-wrap" id="previewWrap" aria-label="Preview">
+            <p class="preview-label">
+                <span class="preview-gem" aria-hidden="true">✦</span>
+                <span id="previewName">My First Website</span>
+            </p>
+            <div class="preview-box">
+                <iframe id="previewFrame"
+                    src="assignments/FUN-01/index.html"
+                    title="Project preview"
+                    loading="lazy"></iframe>
+                <div class="preview-error" id="previewError" hidden>
+                    <p class="pe-icon" aria-hidden="true">✦</p>
+                    <p class="pe-text">This one is still being worked on.</p>
+                    <p class="pe-sub"><em>Please check back later!</em></p>
                 </div>
             </div>
-
-            <div class="stratagem-item" onclick="updatePreview('FUN-02', 'Personnel Bio', 'assignments/FUN-02/index.html')">
-                <div class="code-sequence">→ ↓ ↑ ↑ ←</div>
-                <div class="strat-info">
-                    <span class="strat-id">FUN-02</span>
-                    <span class="strat-name">ABOUT ME (3D LOGO)</span>
-                </div>
-            </div>
-
-            <div class="stratagem-item" onclick="updatePreview('FUN-03', 'Counter Logic', 'assignments/FUN-03/index.html')">
-                <div class="code-sequence">↓ ↓ ↑ → →</div>
-                <div class="strat-info">
-                    <span class="strat-id">FUN-03</span>
-                    <span class="strat-name">INTERACTIVE COUNTER</span>
-                </div>
-            </div>
-
-            <div class="stratagem-item" onclick="updatePreview('FUN-04', 'React Core', 'http://localhost:5173')">
-                <div class="code-sequence">↑ → ↓ ↓ ↓</div>
-                <div class="strat-info">
-                    <span class="strat-id">FUN-04</span>
-                    <span class="strat-name">REACT DEPLOYMENT</span>
-                </div>
-            </div>
-
-            <div class="stratagem-item" onclick="updatePreview('FUN-05', 'Data Extraction', 'http://localhost:5176')">
-                <div class="code-sequence">← ← ↓ ↑ →</div>
-                <div class="strat-info">
-                    <span class="strat-id">FUN-05</span>
-                    <span class="strat-name">MONGODB INTEGRATION</span>
-                </div>
-            </div>
-        </aside>
-
-        <section class="viewport">
-            <div class="viewport-header">
-                <h2 id="current-title">INITIAL DEPLOYMENT</h2>
-                <span class="threat-level">THREAT LEVEL: NEGLIGIBLE</span>
-            </div>
-            
-            <div class="iframe-container">
-                <iframe id="main-frame" src="assignments/FUN-01/index.html"></iframe>
-            </div>
-
-            <div class="deployment-footer">
-                <button class="deploy-btn" id="deploy-link" onclick="window.open('assignments/FUN-01/index.html', '_blank')">
-                    CONFIRM DEPLOYMENT
-                </button>
+            <div class="preview-foot">
+                <button class="open-full" id="openFull">Open in full window</button>
             </div>
         </section>
-    </main>
+
+        <!-- Footer -->
+        <footer class="site-footer">
+            <p class="footer-quote"><em>"Even a single flower can brighten a thousand years of solitude."</em></p>
+            <p class="footer-name">Thanyanop · Robotics &amp; Automation · Third Year</p>
+            <p class="footer-tiny">FRA502 Web Programming · FIBO KMUTT</p>
+        </footer>
+
+    </div>
 
     <script>
-        function updatePreview(id, title, url) {
-            document.getElementById('current-title').innerText = title;
-            document.getElementById('main-frame').src = url;
-            document.getElementById('deploy-link').setAttribute('onclick', `window.open('${url}', '_blank')`);
-            
-            // UI Visual feedback
-            document.querySelectorAll('.stratagem-item').forEach(item => item.classList.remove('active'));
-            event.currentTarget.classList.add('active');
+        // Petal canvas
+        const canvas = document.getElementById('petals');
+        const ctx    = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width  = window.innerWidth;
+            canvas.height = window.innerHeight;
         }
+        resizeCanvas();
+        window.addEventListener('resize', resizeCanvas);
+
+        var motes = [];
+        for (var i = 0; i < 38; i++) {
+            motes.push({
+                x:     Math.random() * window.innerWidth,
+                y:     Math.random() * window.innerHeight,
+                r:     1 + Math.random() * 2.2,
+                a:     0.06 + Math.random() * 0.16,
+                speed: 0.15 + Math.random() * 0.45,
+                drift: (Math.random() - 0.5) * 0.55,
+                wave:  Math.random() * Math.PI * 2,
+                pulse: Math.random() * Math.PI * 2,
+                g:     Math.random() > 0.5 ? '175,215,185' : '200,228,208'
+            });
+        }
+
+        function animatePetals() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (var i = 0; i < motes.length; i++) {
+                var m = motes[i];
+                m.pulse += 0.006;
+                m.wave  += 0.008;
+                m.y     -= m.speed;
+                m.x     += m.drift + Math.sin(m.wave) * 0.4;
+                if (m.y < -10) {
+                    m.y = canvas.height + 10;
+                    m.x = Math.random() * canvas.width;
+                }
+                var alpha = m.a * (0.5 + 0.5 * Math.sin(m.pulse));
+                ctx.beginPath();
+                ctx.arc(m.x, m.y, m.r, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(' + m.g + ',' + alpha + ')';
+                ctx.fill();
+            }
+            requestAnimationFrame(animatePetals);
+        }
+        animatePetals();
+
+        // Preview logic
+        var frame       = document.getElementById('previewFrame');
+        var errEl       = document.getElementById('previewError');
+        var nameEl      = document.getElementById('previewName');
+        var openBtn     = document.getElementById('openFull');
+        var previewWrap = document.getElementById('previewWrap');
+        var currentUrl  = 'assignments/FUN-01/index.html';
+
+        frame.addEventListener('error', function() {
+            frame.hidden = true;
+            errEl.hidden = false;
+        });
+
+        document.querySelectorAll('.btn-view').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                currentUrl         = btn.dataset.url;
+                nameEl.textContent = btn.dataset.name;
+                errEl.hidden       = true;
+                frame.hidden       = false;
+                frame.src          = btn.dataset.url;
+                previewWrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                document.querySelectorAll('.spell-row').forEach(function(r) { r.classList.remove('active'); });
+                var row = document.getElementById('row-' + btn.dataset.num);
+                if (row) row.classList.add('active');
+            });
+        });
+
+        document.querySelectorAll('.btn-link').forEach(function(btn) {
+            btn.addEventListener('click', function() {
+                window.open(btn.dataset.url, '_blank', 'noopener,noreferrer');
+            });
+        });
+
+        openBtn.addEventListener('click', function() {
+            window.open(currentUrl, '_blank', 'noopener,noreferrer');
+        });
     </script>
 </body>
 </html>

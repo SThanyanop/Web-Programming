@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUN-06 — Three.js Scene</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <nav class="top-nav" role="navigation">
+        <a class="back-btn" href="../../../index.html">Back to Spellbook</a>
+    </nav>
+
+    <!-- Three.js canvas -->
+    <canvas id="threeCanvas" aria-label="3D magical scene"></canvas>
+
+    <!-- Overlay UI -->
+    <div class="overlay">
+        <div class="overlay-header">
+            <p class="overlay-label">my three.js project</p>
+            <h1 class="overlay-title">A Mage's Garden</h1>
+            <p class="overlay-sub"><em>I learned Three.js for this — it was really hard but also really fun!</em></p>
+        </div>
+
+        <div class="overlay-hints">
+            <span class="hint">drag to rotate</span>
+            <span class="hint-dot" aria-hidden="true">·</span>
+            <span class="hint">scroll to zoom</span>
+        </div>
+    </div>
+
+    <!-- Loading screen -->
+    <div class="loader" id="loader">
+        <div class="loader-gem" aria-hidden="true">✦</div>
+        <p class="loader-text">Casting scene...</p>
+    </div>
+
+    <!-- Footer -->
+    <footer class="page-footer" role="contentinfo">
+        <p class="footer-quote"><em>"Even if I forget, the spells I've mastered will stay with me."</em></p>
+        <p class="footer-credit">Thanyanop · FRA502 Web Programming · FIBO KMUTT</p>
+    </footer>
+
+    <!-- Three.js from CDN -->
+    <script type="importmap">
+    {
+        "imports": {
+            "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+        }
+    }
+    </script>
+
+    <script type="module">
+        import * as THREE from 'three';
+        import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+        import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+        import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
+
+        // ── Setup ──────────────────────────────────────────────
+        const canvas   = document.getElementById('threeCanvas');
+        const loader   = document.getElementById('loader');
+        const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.shadowMap.enabled = true;
+        renderer.shadowMap.type    = THREE.PCFSoftShadowMap;
+        renderer.toneMapping       = THREE.ACESFilmicToneMapping;
+        renderer.toneMappingExposure = 1.2;
+
+        const scene  = new THREE.Scene();
+        scene.fog    = new THREE.FogExp2(0xc8e8d0, 0.055);
+
+        const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 0.1, 100);
+        camera.position.set(0, 2.5, 9);
+
+        const controls = new OrbitControls(camera, canvas);
+        controls.enableDamping    = true;
+        controls.dampingFactor    = 0.06;
+        controls.minDistance      = 4;
+        controls.maxDistance      = 18;
+        controls.maxPolarAngle    = Math.PI * 0.58;
+        controls.target.set(0, 1, 0);
+
+        // ── Colours (Frieren palette) ──────────────────────────
+        const C = {
+            sky:     0xd4ecf8,
+            meadow:  0xb8deb0,
+            teal:    0x5ab8c8,
+            tealSoft:0x88d0dc,
+            gold:    0xd4a840,
+            goldPale:0xf0d888,
+            white:   0xf0f8f0,
+            mist:    0xc8e8d0,
+        };
+
+        // ── Background gradient (sky) ──────────────────────────
+        scene.background = new THREE.Color(0xcce8f0);
+
+        // ── Lighting ───────────────────────────────────────────
+        // Soft ambient — meadow morning
+        const ambient = new THREE.AmbientLight(C.sky, 0.9);
+        scene.add(ambient);
+
+        // Main sun — warm gold from upper right
+        const sunLight = new THREE.DirectionalLight(C.goldPale, 2.2);
+        sunLight.position.set(6, 10, 5);
+        sunLight.castShadow = true;
+        sunLight.shadow.mapSize.set(2048, 2048);
+        sunLight.shadow.camera.near   = 0.5;
+        sunLight.shadow.camera.far    = 40;
+        sunLight.shadow.camera.left   = -10;
+        sunLight.shadow.camera.right  = 10;
+        sunLight.shadow.camera.top    = 10;
+        sunLight.shadow.camera.bottom = -10;
+        sunLight.shadow.bias = -0.001;
+        scene.add(sunLight);
+
+        // Fill from left — sky blue
+        const fillLight = new THREE.DirectionalLight(0xd0eef8, 0.7);
+        fillLight.position.set(-5, 4, 2);
+        scene.add(fillLight);
+
+        // Orb point light — teal magic glow
+        const orbLight = new THREE.PointLight(C.teal, 3, 8, 2);
+        orbLight.position.set(0, 2.2, 0);
+        scene.add(orbLight);
+
+        // Extra warm ground bounce
+        const groundBounce = new THREE.HemisphereLight(C.meadow, 0x88b878, 0.5);
+        scene.add(groundBounce);
+
+        // ── Ground plane ───────────────────────────────────────
+        const groundGeo = new THREE.PlaneGeometry(30, 30, 32, 32);
+
+        // Slightly undulate vertices for a meadow feel
+        const posArr = groundGeo.attributes.position.array;
+        for (let i = 0; i < posArr.length; i += 3) {
+            const x = posArr[i], z = posArr[i + 2];
+            posArr[i + 1] = (Math.sin(x * 0.5) * Math.cos(z * 0.5)) * 0.12;
+        }
+        groundGeo.computeVertexNormals();
+
+        const groundMat = new THREE.MeshStandardMaterial({
+            color:     0xb4d8a8,
+            roughness: 0.85,
+            metalness: 0.0,
+        });
+        const ground = new THREE.Mesh(groundGeo, groundMat);
+        ground.rotation.x = -Math.PI / 2;
+        ground.receiveShadow = true;
+        scene.add(ground);
+
+        // ── Grass tufts (simple instanced cylinders) ──────────
+        const tuftGeo = new THREE.CylinderGeometry(0, 0.04, 0.3, 4);
+        const tuftMat = new THREE.MeshStandardMaterial({ color: 0x88c070, roughness: 1 });
+        const tufts = new THREE.InstancedMesh(tuftGeo, tuftMat, 180);
+        const dummy = new THREE.Object3D();
+
+        for (let i = 0; i < 180; i++) {
+            const angle = Math.random() * Math.PI * 2;
+            const r     = 1.5 + Math.random() * 9;
+            dummy.position.set(
+                Math.cos(angle) * r,
+                0.1,
+                Math.sin(angle) * r
+            );
+            dummy.rotation.y = Math.random() * Math.PI;
+            dummy.rotation.z = (Math.random() - 0.5) * 0.3;
+            dummy.scale.setScalar(0.7 + Math.random() * 0.8);
+            dummy.updateMatrix();
+            tufts.setMatrixAt(i, dummy.matrix);
+        }
+        tufts.receiveShadow = true;
+        tufts.castShadow    = true;
+        scene.add(tufts);
+
+        // ── Small wildflowers ──────────────────────────────────
+        const flowerColors = [0xf0e0b0, 0xd8c8f8, 0xf0d0d8, 0xe8f0c8];
+        const flowerGeo = new THREE.SphereGeometry(0.05, 6, 6);
+
+        flowerColors.forEach(col => {
+            const mat    = new THREE.MeshStandardMaterial({ color: col, roughness: 0.6, emissive: col, emissiveIntensity: 0.1 });
+            const batch  = new THREE.InstancedMesh(flowerGeo, mat, 40);
+            for (let i = 0; i < 40; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const r     = 2 + Math.random() * 7;
+                dummy.position.set(Math.cos(angle) * r, 0.18, Math.sin(angle) * r);
+                dummy.rotation.set(0, Math.random() * Math.PI, 0);
+                dummy.scale.setScalar(0.8 + Math.random() * 0.5);
+                dummy.updateMatrix();
+                batch.setMatrixAt(i, dummy.matrix);
+            }
+            scene.add(batch);
+        });
+
+        // ── 3D MODEL: Magic crystal ────────────────────────────
+        // A composite gem shape — octahedron + inner glow sphere
+        const crystalGroup = new THREE.Group();
+        crystalGroup.position.set(0, 1.8, 0);
+        scene.add(crystalGroup);
+
+        // Outer crystal shell
+        const crystalGeo = new THREE.OctahedronGeometry(0.9, 0);
+        const crystalMat = new THREE.MeshPhysicalMaterial({
+            color:            C.teal,
+            metalness:        0.0,
+            roughness:        0.05,
+            transmission:     0.85,
+            thickness:        1.2,
+            transparent:      true,
+            opacity:          0.75,
+            ior:              1.5,
+            reflectivity:     0.5,
+            envMapIntensity:  1.0,
+            emissive:         C.teal,
+            emissiveIntensity:0.12,
+        });
+        const crystal = new THREE.Mesh(crystalGeo, crystalMat);
+        crystal.castShadow = true;
+        crystalGroup.add(crystal);
+
+        // Inner glowing orb
+        const innerGeo = new THREE.SphereGeometry(0.45, 32, 32);
+        const innerMat = new THREE.MeshStandardMaterial({
+            color:             C.tealSoft,
+            emissive:          C.teal,
+            emissiveIntensity: 1.8,
+            transparent:       true,
+            opacity:           0.85,
+        });
+        const innerOrb = new THREE.Mesh(innerGeo, innerMat);
+        crystalGroup.add(innerOrb);
+
+        // Outer shimmer ring
+        const ringGeo = new THREE.TorusGeometry(1.1, 0.025, 8, 64);
+        const ringMat = new THREE.MeshStandardMaterial({
+            color:             C.gold,
+            emissive:          C.gold,
+            emissiveIntensity: 0.6,
+            metalness:         0.8,
+            roughness:         0.2,
+        });
+        const ring = new THREE.Mesh(ringGeo, ringMat);
+        ring.rotation.x = Math.PI / 2;
+        crystalGroup.add(ring);
+
+        // Second tilted ring
+        const ring2 = ring.clone();
+        ring2.rotation.set(Math.PI / 4, 0, Math.PI / 4);
+        crystalGroup.add(ring2);
+
+        // ── Particle system: floating motes ────────────────────
+        const moteCount  = 220;
+        const moteGeo    = new THREE.BufferGeometry();
+        const motePos    = new Float32Array(moteCount * 3);
+        const motePhase  = new Float32Array(moteCount);
+
+        for (let i = 0; i < moteCount; i++) {
+            const r     = 1 + Math.random() * 5.5;
+            const theta = Math.random() * Math.PI * 2;
+            const phi   = Math.random() * Math.PI;
+            motePos[i * 3]     = r * Math.sin(phi) * Math.cos(theta);
+            motePos[i * 3 + 1] = Math.random() * 5.5;
+            motePos[i * 3 + 2] = r * Math.sin(phi) * Math.sin(theta);
+            motePhase[i]        = Math.random() * Math.PI * 2;
+        }
+
+        moteGeo.setAttribute('position', new THREE.BufferAttribute(motePos, 3));
+        const moteMat = new THREE.PointsMaterial({
+            color:       C.goldPale,
+            size:        0.045,
+            transparent: true,
+            opacity:     0.7,
+            sizeAttenuation: true,
+        });
+        const motes = new THREE.Points(moteGeo, moteMat);
+        scene.add(motes);
+
+        // ── 3D Floating rune rings ─────────────────────────────
+        const runeRingGeo = new THREE.TorusGeometry(1.8, 0.008, 6, 80);
+        const runeRingMat = new THREE.MeshStandardMaterial({
+            color:             C.gold,
+            emissive:          C.gold,
+            emissiveIntensity: 0.35,
+            transparent:       true,
+            opacity:           0.4,
+        });
+
+        const runeRing1 = new THREE.Mesh(runeRingGeo, runeRingMat);
+        runeRing1.position.y = 1.8;
+        scene.add(runeRing1);
+
+        const runeRing2 = new THREE.Mesh(runeRingGeo, runeRingMat.clone());
+        runeRing2.position.y = 1.8;
+        runeRing2.rotation.x = Math.PI / 3;
+        scene.add(runeRing2);
+
+        // ── Ground glow disc ───────────────────────────────────
+        const glowGeo = new THREE.CircleGeometry(1.6, 64);
+        const glowMat = new THREE.MeshBasicMaterial({
+            color:       C.teal,
+            transparent: true,
+            opacity:     0.08,
+        });
+        const glowDisc = new THREE.Mesh(glowGeo, glowMat);
+        glowDisc.rotation.x = -Math.PI / 2;
+        glowDisc.position.y  = 0.01;
+        scene.add(glowDisc);
+
+        // ── 3D TEXT (FontLoader + TextGeometry) ────────────────
+        const fontLoader = new FontLoader();
+
+        // Using a typeface.js font from Three.js examples
+        fontLoader.load(
+            'https://unpkg.com/three@0.160.0/examples/fonts/gentilis_regular.typeface.json',
+            (font) => {
+                // Main title text
+                const titleGeo = new TextGeometry('A Mage\'s Garden', {
+                    font:           font,
+                    size:           0.32,
+                    height:         0.06,
+                    curveSegments:  12,
+                    bevelEnabled:   true,
+                    bevelThickness: 0.008,
+                    bevelSize:      0.004,
+                    bevelSegments:  4,
+                });
+                titleGeo.computeBoundingBox();
+                const titleWidth = titleGeo.boundingBox.max.x - titleGeo.boundingBox.min.x;
+
+                const titleMat = new THREE.MeshStandardMaterial({
+                    color:             C.white,
+                    emissive:          C.gold,
+                    emissiveIntensity: 0.25,
+                    roughness:         0.4,
+                    metalness:         0.1,
+                });
+
+                const titleMesh = new THREE.Mesh(titleGeo, titleMat);
+                titleMesh.position.set(-titleWidth / 2, 3.5, 0);
+                titleMesh.castShadow = true;
+                scene.add(titleMesh);
+
+                // Sub text
+                const subGeo = new TextGeometry('by Thanyanop', {
+                    font:          font,
+                    size:          0.15,
+                    height:        0.03,
+                    curveSegments: 8,
+                    bevelEnabled:  true,
+                    bevelThickness:0.004,
+                    bevelSize:     0.002,
+                    bevelSegments: 3,
+                });
+                subGeo.computeBoundingBox();
+                const subWidth = subGeo.boundingBox.max.x - subGeo.boundingBox.min.x;
+
+                const subMat = new THREE.MeshStandardMaterial({
+                    color:             C.goldPale,
+                    emissive:          C.gold,
+                    emissiveIntensity: 0.2,
+                    roughness:         0.5,
+                    metalness:         0.05,
+                });
+
+                const subMesh = new THREE.Mesh(subGeo, subMat);
+                subMesh.position.set(-subWidth / 2, 3.0, 0);
+                subMesh.castShadow = true;
+                scene.add(subMesh);
+
+                // Animate text in
+                titleMesh.scale.set(0, 0, 0);
+                subMesh.scale.set(0, 0, 0);
+
+                let t = 0;
+                const textFadeIn = () => {
+                    t += 0.04;
+                    const s = Math.min(1, t);
+                    titleMesh.scale.setScalar(s);
+                    subMesh.scale.setScalar(s * 0.85);
+                    if (t < 1) requestAnimationFrame(textFadeIn);
+                };
+                setTimeout(textFadeIn, 600);
+
+                // Hide loader
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
+            },
+            undefined,
+            (err) => {
+                console.warn('Font failed, scene still works:', err);
+                loader.style.opacity = '0';
+                setTimeout(() => loader.style.display = 'none', 500);
+            }
+        );
+
+        // ── Small floating orbs ────────────────────────────────
+        const smallOrbs = [];
+        const orbPositions = [
+            [-2.5, 1.2, -1], [2.8, 0.8, -0.5],
+            [-1.5, 0.6, 2],  [3, 1.5, 1.5],
+            [-3, 0.9, 0.5],  [1.5, 0.5, -2.5],
+        ];
+
+        orbPositions.forEach(([x, y, z], i) => {
+            const geo = new THREE.SphereGeometry(0.08 + Math.random() * 0.06, 12, 12);
+            const mat = new THREE.MeshStandardMaterial({
+                color:             i % 2 === 0 ? C.teal : C.gold,
+                emissive:          i % 2 === 0 ? C.teal : C.gold,
+                emissiveIntensity: 1.2,
+                transparent:       true,
+                opacity:           0.8,
+            });
+            const mesh = new THREE.Mesh(geo, mat);
+            mesh.position.set(x, y, z);
+            mesh.castShadow = false;
+            scene.add(mesh);
+            smallOrbs.push({ mesh, baseY: y, phase: Math.random() * Math.PI * 2, speed: 0.4 + Math.random() * 0.5 });
+        });
+
+        // ── Resize handler ─────────────────────────────────────
+        window.addEventListener('resize', () => {
+            camera.aspect = window.innerWidth / window.innerHeight;
+            camera.updateProjectionMatrix();
+            renderer.setSize(window.innerWidth, window.innerHeight);
+        });
+
+        // ── Animation loop ─────────────────────────────────────
+        const clock = new THREE.Clock();
+
+        function animate() {
+            requestAnimationFrame(animate);
+            const t   = clock.getElapsedTime();
+            const dt  = clock.getDelta();
+
+            // Crystal rotation + gentle bob
+            crystalGroup.rotation.y  = t * 0.5;
+            crystalGroup.rotation.x  = Math.sin(t * 0.3) * 0.08;
+            crystalGroup.position.y  = 1.8 + Math.sin(t * 0.8) * 0.15;
+
+            // Inner orb pulse
+            const pulse = 0.45 + Math.sin(t * 1.8) * 0.06;
+            innerOrb.scale.setScalar(pulse / 0.45);
+            innerMat.emissiveIntensity = 1.5 + Math.sin(t * 2.0) * 0.5;
+
+            // Rings counter-rotate
+            runeRing1.rotation.y = t * 0.4;
+            runeRing1.rotation.z = t * 0.25;
+            runeRing2.rotation.y = -t * 0.3;
+            runeRing2.rotation.x = Math.PI / 3 + t * 0.2;
+
+            // Crystal rings
+            ring.rotation.y  = t * 0.7;
+            ring2.rotation.z = t * 0.5;
+
+            // Orb light flicker
+            orbLight.intensity   = 2.8 + Math.sin(t * 2.5) * 0.4;
+            orbLight.position.copy(crystalGroup.position);
+
+            // Ground glow pulse
+            glowMat.opacity = 0.05 + Math.sin(t * 1.5) * 0.03;
+
+            // Mote particles drift upward slowly
+            const motePositions = moteGeo.attributes.position.array;
+            for (let i = 0; i < moteCount; i++) {
+                motePositions[i * 3 + 1] += 0.003;
+                if (motePositions[i * 3 + 1] > 6) {
+                    motePositions[i * 3 + 1] = 0;
+                }
+                // Gentle sway
+                motePositions[i * 3] += Math.sin(t + motePhase[i]) * 0.0008;
+            }
+            moteGeo.attributes.position.needsUpdate = true;
+            moteMat.opacity = 0.5 + Math.sin(t * 0.5) * 0.15;
+
+            // Small orbs bob
+            smallOrbs.forEach(({ mesh, baseY, phase, speed }) => {
+                mesh.position.y = baseY + Math.sin(t * speed + phase) * 0.18;
+                mesh.material.emissiveIntensity = 1.0 + Math.sin(t * 1.5 + phase) * 0.4;
+            });
+
+            controls.update();
+            renderer.render(scene, camera);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
